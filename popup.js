@@ -1432,9 +1432,6 @@ class PopupUI {
         </svg>
         ${safeRuleName}
       `;
-      btn.addEventListener('click', () => {
-        this.switchRuleTab(safeRuleId);
-      });
       
       // Insert after "all" button
       const allBtn = this.ruleTabsNavigation.querySelector('.rule-tab-btn[data-rule="all"]');
