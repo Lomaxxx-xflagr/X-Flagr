@@ -1,0 +1,50 @@
+{
+  "manifest_version": 3,
+  "name": "X-Flagr",
+  "version": "1.0.1",
+  "description": "Professional moderation tool for X.com/Twitter. Mark rule-breaking users with colored labels for better community management.",
+  "author": "Lomaxxx",
+  "homepage_url": "https://github.com/Lomaxxx-xflagr/X-Flagr",
+  "support_url": "https://github.com/Lomaxxx-xflagr/X-Flagr/issues",
+  "privacy_policy_url": "https://github.com/Lomaxxx-xflagr/X-Flagr/blob/main/PRIVACY_POLICY.md",
+  "permissions": [
+    "storage",
+    "activeTab",
+    "notifications"
+  ],
+  "host_permissions": [
+    "https://x.com/*",
+    "https://twitter.com/*"
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "X-Flagr",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://x.com/*", "https://twitter.com/*"],
+      "js": ["content.js"],
+      "css": ["content.css"],
+      "run_at": "document_end"
+    }
+  ],
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self'; style-src 'self' 'unsafe-inline';"
+  },
+  "web_accessible_resources": [
+    {
+      "resources": ["icons/*", "images/*"],
+      "matches": ["https://x.com/*", "https://twitter.com/*"]
+    }
+  ]
+}

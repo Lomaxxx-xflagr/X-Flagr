@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<!--
+  X-Flagr (X.com Mod Community Tool)
+  Popup HTML
+  
+  Main popup interface HTML structure for the extension.
+  Includes tabs for Users, Rules, Marked Users, and Settings.
+  
+  @version 1.0.0
+  
+  Copyright (c) 2025 Lomaxxx
+  All Rights Reserved.
+  
+  This software and associated documentation files (the "Software") are 
+  proprietary and confidential. Unauthorized copying, modification, 
+  distribution, or use of this Software, via any medium, is strictly 
+  prohibited without the express written permission of Lomaxxx.
+  
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, 
+  EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF 
+  MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+-->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>X-Flagr</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <!-- Floating User Details Panel -->
+  <div id="floatingPanel" class="floating-panel" style="display: none">
+    <div class="floating-panel-header">
+      <div class="floating-panel-title">
+        <span id="floatingPanelUsername">User Details</span>
+      </div>
+      <button id="closeFloatingPanel" class="floating-panel-close">
+        <svg width="16" height="16" viewBox="0 0 384 512" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+          <path d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"/>
+        </svg>
+      </button>
+    </div>
+    <div class="floating-panel-content">
+      <div class="floating-panel-body">
+        <div id="floatingUserContent" class="floating-tab-content">
+          <div class="floating-loading">Loading user details...</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <!-- Header -->
+    <div class="header">
+      <div class="logo">
+        <div class="logo-icon">
+          <img src="images/x-flagr-logo.svg" alt="X-Flagr Logo" class="logo-img">
+        </div>
+      </div>
+      <div class="header-status">
+        <div class="status-dot active"></div>
+        <span>Active</span>
+      </div>
+    </div>
+
+    <!-- Tab Navigation -->
+    <div class="tab-navigation">
+      <button class="tab-btn active" data-tab="users">
+        <svg width="16" height="16" viewBox="0 0 640 512" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+          <path d="M144 160c-44.2 0-80-35.8-80-80s35.8-80 80-80s80 35.8 80 80s-35.8 80-80 80zm368 0c-44.2 0-80-35.8-80-80s35.8-80 80-80s80 35.8 80 80s-35.8 80-80 80zM0 298.7C0 239.8 47.8 192 106.7 192h42.7c15.9 0 31 3.5 44.6 9.7c-1.3 7.2-1.9 14.7-1.9 22.3c0 38.2 16.8 72.5 43.5 96c-.9 0-1.8-.1-2.7-.1H21.3C9.6 320 0 310.4 0 298.7zM405.3 320c-.9 0-1.8 .1-2.7 .1c26.7-23.5 43.5-57.8 43.5-96c0-7.6-.7-15-1.9-22.3c13.6-6.2 28.7-9.7 44.6-9.7h42.7C592.2 192 640 239.8 640 298.7c0 11.8-9.6 21.3-21.3 21.3H405.3zM224 224a96 96 0 1 1 192 0 96 96 0 1 1 -192 0zM128 485.3C128 411.7 186.7 352 260.3 352H379.7C453.3 352 512 411.7 512 485.3c0 14.7-11.9 26.7-26.7 26.7H154.7c-14.7 0-26.7-11.9-26.7-26.7z"/>
+        </svg>
+        Users
+      </button>
+      <button class="tab-btn" data-tab="rules">
+        <svg width="16" height="16" viewBox="0 0 512 512" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+          <path d="M336 352c97.2 0 176-78.8 176-176S433.2 0 336 0S160 78.8 160 176c0 18.7 2.9 36.8 8.3 53.7L7 391c-4.5 4.5-7 10.6-7 17v80c0 13.3 10.7 24 24 24h80c13.3 0 24-10.7 24-24V448h40c13.3 0 24-10.7 24-24V384h40c6.4 0 12.5-2.5 17-7l33.3-33.3c16.9 5.4 35 8.3 53.7 8.3zM376 96a40 40 0 1 1 0 80 40 40 0 1 1 0-80z"/>
+        </svg>
+        Rules
+      </button>
+      <button class="tab-btn" data-tab="analytics">
+        <svg width="16" height="16" viewBox="0 0 512 512" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+          <path d="M40 48C26.7 48 16 58.7 16 72v368c0 13.3 10.7 24 24 24s24-10.7 24-24V72c0-13.3-10.7-24-24-24zm120 0c-13.3 0-24 10.7-24 24v368c0 13.3 10.7 24 24 24s24-10.7 24-24V72c0-13.3-10.7-24-24-24zm120 0c-13.3 0-24 10.7-24 24v368c0 13.3 10.7 24 24 24s24-10.7 24-24V72c0-13.3-10.7-24-24-24zm120 0c-13.3 0-24 10.7-24 24v368c0 13.3 10.7 24 24 24s24-10.7 24-24V72c0-13.3-10.7-24-24-24z"/>
+        </svg>
+        Marked
+      </button>
+      <button class="tab-btn" data-tab="settings">
+        <svg width="16" height="16" viewBox="0 0 512 512" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+          <path d="M495.9 166.6c3.2 8.7 .5 18.4-6.4 24.6l-43.3 39.4c1.1 8.3 1.7 16.8 1.7 25.4s-.6 17.1-1.7 25.4l43.3 39.4c6.9 6.2 9.6 15.9 6.4 24.6c-4.4 11.9-9.7 23.3-15.8 34.3l-4.7 8.1c-6.6 11-14 21.4-22.1 31.2c-5.9 7.2-15.7 9.6-24.5 6.8l-55.7-17.4c-13.4 10.3-28.2 18.9-44 25.4l-12.5 57.1c-2 9.1-9 16.3-18.2 17.8c-13.8 2.3-28 3.5-42.5 3.5s-28.7-1.2-42.5-3.5c-9.2-1.5-16.2-8.7-18.2-17.8l-12.5-57.1c-15.8-6.5-30.6-15.1-44-25.4L83.1 425.9c-8.8 2.8-18.6 .3-24.5-6.8c-8.1-9.8-15.5-20.2-22.1-31.2l-4.7-8.1c-6.1-11-11.4-22.4-15.8-34.3c-3.2-8.7-.5-18.4 6.4-24.6l43.3-39.4C64.6 273.1 64 264.6 64 256s.6-17.1 1.7-25.4L22.4 191.2c-6.9-6.2-9.6-15.9-6.4-24.6c4.4-11.9 9.7-23.3 15.8-34.3l4.7-8.1c6.6-11 14-21.4 22.1-31.2c5.9-7.2 15.7-9.6 24.5-6.8l55.7 17.4c13.4-10.3 28.2-18.9 44-25.4l12.5-57.1c2-9.1 9-16.3 18.2-17.8C213.3 1.2 227.5 0 242 0s28.7 1.2 42.5 3.5c9.2 1.5 16.2 8.7 18.2 17.8l12.5 57.1c15.8 6.5 30.6 15.1 44 25.4l55.7-17.4c8.8-2.8 18.6-.3 24.5 6.8c8.1 9.8 15.5 20.2 22.1 31.2l4.7 8.1c6.1 11 11.4 22.4 15.8 34.3zM256 336a80 80 0 1 0 0-160 80 80 0 1 0 0 160z"/>
+        </svg>
+        Settings
+      </button>
+    </div>
+
+    <!-- Tab Content -->
+    <div class="tab-content active" id="users-content">
+      <!-- Add User Section -->
+      <div class="card add-user-card">
+        <h2>Mark New User</h2>
+        <div class="form-group">
+          <label for="usernameInput">Username (with @)</label>
+          <input type="text" id="usernameInput" placeholder="e.g. @johndoe">
+        </div>
+        <div class="form-group">
+          <label for="ruleSelect">Rule Violation</label>
+          <div class="select-wrapper">
+            <select id="ruleSelect">
+              <option value="">Select a rule...</option>
+            </select>
+            <span class="select-arrow"></span>
+          </div>
+        </div>
+        <button id="addUserBtn" class="btn btn-primary">Add User</button>
+        
+        <!-- Rule Color Legend -->
+        <div class="rule-legend">
+          <h3>Rule Colors</h3>
+          <div id="ruleLegendGrid" class="legend-grid">
+            <div class="empty-state">
+              <p>No rules defined yet. Go to the Rules tab to create your first rule.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Rules Tab Content -->
+    <div class="tab-content" id="rules-content">
+      <!-- Add Rule Section -->
+      <div class="card add-rule-card">
+        <div class="card-header-collapsible">
+          <h2>Add New Rule</h2>
+          <button class="collapse-btn" id="addRuleCollapseBtn">
+            <svg width="12" height="12" viewBox="0 0 448 512" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+              <path d="M201.4 342.6c12.5 12.5 32.8 12.5 45.3 0l160-160c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 274.7 86.6 137.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l160 160z"/>
+            </svg>
+          </button>
+        </div>
+        <div class="card-content-collapsible collapsed" id="addRuleContent">
+          <div class="form-group">
+            <label for="ruleNameInput">Rule Name</label>
+            <input type="text" id="ruleNameInput" placeholder="e.g. Be kind and respectful" maxlength="50">
+          </div>
+          <div class="form-group">
+            <label for="ruleColorInput">Rule Color</label>
+            <div class="color-picker-wrapper">
+              <input type="color" id="ruleColorInput" value="#ef4444">
+              <span class="color-preview" id="colorPreview">#ef4444</span>
+            </div>
+          </div>
+          <button id="addRuleBtn" class="btn btn-primary">Add Rule</button>
+        </div>
+      </div>
+
+      <!-- Rules List -->
+      <div class="card rules-list-card">
+        <div class="card-header-collapsible">
+          <h2>Your Rules (<span id="ruleCount">0</span>)</h2>
+          <button class="collapse-btn" id="rulesListCollapseBtn">
+            <svg width="12" height="12" viewBox="0 0 448 512" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+              <path d="M201.4 342.6c12.5 12.5 32.8 12.5 45.3 0l160-160c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 274.7 86.6 137.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l160 160z"/>
+            </svg>
+          </button>
+        </div>
+        <div class="card-content-collapsible collapsed" id="rulesListContent">
+          <div id="rulesList" class="rules-list">
+            <div class="empty-state" id="rulesEmptyState">
+              <p>No rules created yet.</p>
+              <p>Add your first rule above to get started.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Analytics Tab Content -->
+    <div class="tab-content" id="analytics-content">
+      <div class="analytics-dashboard">
+        <div class="analytics-card">
+          <div class="analytics-title">
+            <svg width="16" height="16" viewBox="0 0 640 512" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+              <path d="M144 160c-44.2 0-80-35.8-80-80s35.8-80 80-80s80 35.8 80 80s-35.8 80-80 80zm368 0c-44.2 0-80-35.8-80-80s35.8-80 80-80s80 35.8 80 80s-35.8 80-80 80zM0 298.7C0 239.8 47.8 192 106.7 192h42.7c15.9 0 31 3.5 44.6 9.7c-1.3 7.2-1.9 14.7-1.9 22.3c0 38.2 16.8 72.5 43.5 96c-.9 0-1.8-.1-2.7-.1H21.3C9.6 320 0 310.4 0 298.7zM405.3 320c-.9 0-1.8 .1-2.7 .1c26.7-23.5 43.5-57.8 43.5-96c0-7.6-.7-15-1.9-22.3c13.6-6.2 28.7-9.7 44.6-9.7h42.7C592.2 192 640 239.8 640 298.7c0 11.8-9.6 21.3-21.3 21.3H405.3zM224 224a96 96 0 1 1 192 0 96 96 0 1 1 -192 0zM128 485.3C128 411.7 186.7 352 260.3 352H379.7C453.3 352 512 411.7 512 485.3c0 14.7-11.9 26.7-26.7 26.7H154.7c-14.7 0-26.7-11.9-26.7-26.7z"/>
+            </svg>
+            Total Users
+          </div>
+          <div class="analytics-value" id="totalUsers">0</div>
+        </div>
+        <div class="analytics-card">
+          <div class="analytics-title">
+            <svg width="16" height="16" viewBox="0 0 512 512" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+              <path d="M345 39.1L472.8 168.4c52.1 52 52.1 135.6 0 187.6c-52 52.1-135.6 52.1-187.6 0L157.3 226.7c-52.1-52-52.1-135.6 0-187.6c52-52.1 135.6-52.1 187.6 0zM416 186.3c0 46.4-37.6 84-84 84c-46.4 0-84-37.6-84-84c0-46.4 37.6-84 84-84c46.4 0 84 37.6 84 84zM168 272c-46.4 0-84 37.6-84 84s37.6 84 84 84s84-37.6 84-84s-37.6-84-84-84z"/>
+            </svg>
+            Active Labels
+          </div>
+          <div class="analytics-value" id="activeLabels">0</div>
+        </div>
+        <div class="analytics-card">
+          <div class="analytics-title">
+            <svg width="16" height="16" viewBox="0 0 576 512" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+              <path d="M248.747 204.705l6.588 112c.37 6.343 5.6 11.295 11.951 11.295h41.222c6.351 0 11.581-4.952 11.951-11.295l6.588-112c.375-6.874-5.101-12.705-11.951-12.705h-54.454c-6.851 0-12.326 5.831-11.951 12.705zM330 384c0 23.196-18.804 42-42 42s-42-18.804-42-42s18.804-42 42-42s42 18.804 42 42zm46-240H188c-15.369 0-27.844 12.492-27.99 27.861l-4 216C159.851 403.526 172.366 416 188 416h200c15.641 0 28-12.36 28-28V172c0-15.641-12.36-28-28-28zm48 174c0 20.309-13.76 38.681-33.407 46.388l-8.4 2.821c-6.702 2.25-13.193-1.162-15.443-7.882l-8.4-28.135c-2.25-6.72-9.024-10.231-15.724-7.981l-8.4 2.821c-19.647 7.707-33.407 26.079-33.407 46.388v40.233c0 7.498 5.785 14.032 13.292 14.709l26.777 2.458c8.462.777 15.931-5.605 15.931-14.036v-27.557c0-10.742 9.551-19.764 22.562-19.764h57.836c12.884 0 23.318 10.878 22.562 23.75l-2.484 20.5C457.848 433.158 443.393 448 425.396 448H298.604c-21.177 0-37.318-20.149-32.478-40.773l15.582-72.717c3.467-16.163 18.163-27.645 34.878-27.645h83.996c21.177 0 37.318 20.149 32.478 40.773L420.95 320h35.05c8.837 0 16-7.163 16-16v-16c0-8.837-7.163-16-16-16h-42.75z"/>
+            </svg>
+            Rule Violations
+          </div>
+          <div class="analytics-value" id="totalViolations">0</div>
+        </div>
+        <div class="analytics-card">
+          <div class="analytics-title">
+            <svg width="16" height="16" viewBox="0 0 512 512" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+              <path d="M64 64c0-17.7-14.3-32-32-32S0 46.3 0 64V400c0 44.2 35.8 80 80 80H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H80c-8.8 0-16-7.2-16-16V64zm406.1 278.5c-7.1-5.1-8.5-15.1-3.4-22.2l36-48c5.1-7.1 15.1-8.5 22.2-3.4s8.5 15.1 3.4 22.2l-36 48c-5.1 7.1-15.1 8.5-22.2 3.4zM112 112H352c8.8 0 16 7.2 16 16s-7.2 16-16 16H112c-8.8 0-16-7.2-16-16s7.2-16 16-16zm0 64H352c8.8 0 16 7.2 16 16s-7.2 16-16 16H112c-8.8 0-16-7.2-16-16s7.2-16 16-16zm0 64H288c8.8 0 16 7.2 16 16s-7.2 16-16 16H112c-8.8 0-16-7.2-16-16s7.2-16 16-16z"/>
+            </svg>
+            Today's Activity
+          </div>
+          <div class="analytics-value" id="todayActivity">0</div>
+        </div>
+      </div>
+
+      <!-- Advanced Statistics -->
+      <div class="card advanced-stats-card">
+        <div class="card-header-collapsible">
+          <h2>Advanced Statistics</h2>
+          <button class="collapse-btn" id="advancedStatsCollapseBtn">
+            <svg width="12" height="12" viewBox="0 0 384 512" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+              <path d="M192 384c-8.188 0-16.38-3.125-22.62-9.375l-160-160c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L192 306.8l137.4-137.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-160 160C208.4 380.9 200.2 384 192 384z"/>
+            </svg>
+          </button>
+        </div>
+        
+        <div class="card-content-collapsible collapsed" id="advancedStatsContent">
+        <!-- Time Period Selector -->
+        <div class="stats-period-selector">
+          <button class="period-btn active" data-period="7">7 Days</button>
+          <button class="period-btn" data-period="30">30 Days</button>
+          <button class="period-btn" data-period="90">90 Days</button>
+          <button class="period-btn" data-period="all">All Time</button>
+        </div>
+
+        <!-- Top Violations -->
+        <div class="stats-section">
+          <h3>Top Violations</h3>
+          <div class="top-violations-list" id="topViolationsList">
+            <!-- Dynamically generated -->
+          </div>
+        </div>
+
+        <!-- Analytics Charts Section -->
+        <div class="analytics-charts-section">
+          <h3 class="analytics-charts-title">Charts & Analytics</h3>
+          <div class="analytics-tabs-navigation">
+            <button class="analytics-tab-btn active" data-tab="violations-time">
+            <svg width="12" height="12" viewBox="0 0 512 512" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+              <path d="M32 32c17.7 0 32 14.3 32 32V400c0 8.8 7.2 16 16 16H480c17.7 0 32 14.3 32 32s-14.3 32-32 32H80c-44.2 0-80-35.8-80-80V64C0 46.3 14.3 32 32 32zm96 96c0-17.7 14.3-32 32-32h96c17.7 0 32 14.3 32 32v96c0 17.7-14.3 32-32 32H160c-17.7 0-32-14.3-32-32V128zm224 0c0-17.7 14.3-32 32-32h96c17.7 0 32 14.3 32 32V352c0 17.7-14.3 32-32 32H384c-17.7 0-32-14.3-32-32V128z"/>
+            </svg>
+            Over Time
+          </button>
+          <button class="analytics-tab-btn" data-tab="trends">
+            <svg width="12" height="12" viewBox="0 0 448 512" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+              <path d="M201.4 137.4c12.5-12.5 32.8-12.5 45.3 0l160 160c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L224 205.3 86.6 342.6c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3l160-160z"/>
+            </svg>
+            Trends
+          </button>
+          <button class="analytics-tab-btn" data-tab="week-comparison">
+            <svg width="12" height="12" viewBox="0 0 512 512" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+              <path d="M184 48l144 0c4.4 0 8 3.6 8 8l0 40L176 96l0-40c0-4.4 3.6-8 8-8zm-56 8l0 40L64 96C28.7 96 0 124.7 0 160l0 96 192 0 128 0 192 0 0-96c0-35.3-28.7-64-64-64l-64 0 0-40c0-30.9-25.1-56-56-56L184 0c-30.9 0-56 25.1-56 56zM512 288l-192 0-128 0L0 288l0 160c0 35.3 28.7 64 64 64l384 0c35.3 0 64-28.7 64-64l0-160z"/>
+            </svg>
+            Week Compare
+          </button>
+          <button class="analytics-tab-btn" data-tab="heatmap">
+            <svg width="12" height="12" viewBox="0 0 512 512" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+              <path d="M64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H64zm80 192H176V160H144v64zm-48-64c-26.5 0-48 21.5-48 48v64c0 26.5 21.5 48 48 48H96c26.5 0 48-21.5 48-48V208c0-26.5-21.5-48-48-48H96zm112 16H256V160H208v16zm64 0H320V160H272v16zm80-16H368V192h16c26.5 0 48 21.5 48 48v64c0 26.5-21.5 48-48 48H368V352H336V320H304v32H272V288H240v32H208V256H240V224H272v32h32V224h32v32h32V208zM96 240v64H48V240H96zm336 48c0-8.8 7.2-16 16-16s16 7.2 16 16v64c0 8.8-7.2 16-16 16s-16-7.2-16-16V288zm16 112c8.8 0 16-7.2 16-16s-7.2-16-16-16s-16 7.2-16 16s7.2 16 16 16z"/>
+            </svg>
+            Heatmap
+          </button>
+          </div>
+        </div>
+
+        <!-- Analytics Tab Content -->
+        <div class="analytics-tab-content active" id="analytics-tab-violations-time">
+          <div class="stats-section">
+            <h3>Violations Over Time</h3>
+            <div class="chart-container">
+              <div class="chart-bars" id="violationsChart">
+                <!-- Dynamically generated chart bars -->
+              </div>
+              <div class="chart-labels" id="chartLabels">
+                <!-- Dynamically generated labels -->
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="analytics-tab-content" id="analytics-tab-trends">
+          <div class="stats-section">
+            <h3>Trends</h3>
+            <div class="trends-container" id="trendsContainer">
+              <!-- Dynamically generated -->
+            </div>
+          </div>
+        </div>
+
+        <div class="analytics-tab-content" id="analytics-tab-week-comparison">
+          <div class="stats-section">
+            <h3>Week Comparison</h3>
+            <div class="week-comparison-container" id="weekComparisonContainer">
+              <!-- Dynamically generated -->
+            </div>
+          </div>
+        </div>
+
+        <div class="analytics-tab-content" id="analytics-tab-heatmap">
+          <div class="stats-section">
+            <h3>Violations Heatmap</h3>
+            <div class="heatmap-container" id="heatmapContainer">
+              <!-- Dynamically generated -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Top Offenders -->
+        <div class="stats-section top-offenders-section">
+          <h3>Top Offenders</h3>
+          <div class="top-offenders-list" id="topOffendersList">
+            <!-- Dynamically generated -->
+          </div>
+        </div>
+
+        <!-- Report Export -->
+        <div class="stats-section">
+          <h3>Export Reports</h3>
+          <div class="report-export-container">
+            <button class="btn btn-secondary" id="exportWeeklyReportBtn" style="width: 100%; margin-bottom: 8px;">
+              Export Weekly Report (CSV)
+            </button>
+            <button class="btn btn-secondary" id="exportMonthlyReportBtn" style="width: 100%;">
+              Export Monthly Report (CSV)
+            </button>
+          </div>
+        </div>
+        </div>
+      </div>
+
+      <!-- Complete User List with Rule Tabs -->
+      <div class="card analytics-users-card">
+        <h2>Marked Users</h2>
+        
+        <!-- Search and Filter Section -->
+        <div class="analytics-search-filter">
+          <div class="search-wrapper">
+            <svg width="14" height="14" viewBox="0 0 512 512" fill="currentColor" xmlns="http://www.w3.org/2000/svg" class="search-icon">
+              <path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"/>
+            </svg>
+            <input type="text" id="analyticsSearchInput" class="analytics-search-input" placeholder="Search users...">
+            <button class="search-clear-btn" id="searchClearBtn" style="display: none;">
+              <svg width="12" height="12" viewBox="0 0 384 512" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <path d="M324.5 411.1c6.2 6.2 16.4 6.2 22.6 0s6.2-16.4 0-22.6L214.6 256 347.1 123.5c6.2-6.2 6.2-16.4 0-22.6s-16.4-6.2-22.6 0L192 233.4 59.5 100.9c-6.2-6.2-16.4-6.2-22.6 0s-6.2 16.4 0 22.6L169.4 256 36.9 388.5c-6.2 6.2-6.2 16.4 0 22.6s16.4 6.2 22.6 0L192 278.6 324.5 411.1z"/>
+              </svg>
+            </button>
+          </div>
+          <div class="filter-wrapper">
+            <select id="analyticsSortSelect" class="analytics-sort-select">
+              <option value="newest">Newest first</option>
+              <option value="oldest">Oldest first</option>
+              <option value="most-violations">Most violations</option>
+              <option value="least-violations">Least violations</option>
+              <option value="username-asc">Username A-Z</option>
+              <option value="username-desc">Username Z-A</option>
+            </select>
+          </div>
+        </div>
+        
+        <!-- Bulk Actions Bar -->
+        <div class="bulk-actions-bar" id="bulkActionsBar" style="display: none;">
+          <div class="bulk-actions-info">
+            <span id="bulkActionsCount">0</span> selected
+          </div>
+          <div class="bulk-actions-buttons">
+            <button id="selectAllBtn" class="btn btn-secondary btn-small">Select All</button>
+            <button id="deselectAllBtn" class="btn btn-secondary btn-small">Deselect All</button>
+            <button id="removeSelectedBtn" class="btn btn-secondary btn-small">
+              <svg width="12" height="12" viewBox="0 0 448 512" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <path d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z"/>
+              </svg>
+              Remove Selected
+            </button>
+            <button id="exportSelectedBtn" class="btn btn-secondary btn-small">
+              <svg width="12" height="12" viewBox="0 0 512 512" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <path d="M288 32c0-17.7-14.3-32-32-32s-32 14.3-32 32V274.7l-73.4-73.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l128 128c12.5 12.5 32.8 12.5 45.3 0l128-128c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L288 274.7V32zM64 352c-35.3 0-64 28.7-64 64v32c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V416c0-35.3-28.7-64-64-64H346.5l-45.3 45.3c-25 25-65.5 25-90.5 0L165.5 352H64zm368 56a24 24 0 1 1 0 48 24 24 0 1 1 0-48z"/>
+              </svg>
+              Export Selected
+            </button>
+          </div>
+        </div>
+
+        <!-- Rule Tabs Navigation -->
+        <div class="rule-tabs-navigation">
+          <button class="rule-tab-btn active" data-rule="all">
+            <svg width="14" height="14" viewBox="0 0 512 512" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+              <path d="M32 32c17.7 0 32 14.3 32 32V400c0 8.8 7.2 16 16 16H480c17.7 0 32 14.3 32 32s-14.3 32-32 32H80c-44.2 0-80-35.8-80-80V64C0 46.3 14.3 32 32 32zm96 96c0-17.7 14.3-32 32-32h96c17.7 0 32 14.3 32 32v96c0 17.7-14.3 32-32 32H160c-17.7 0-32-14.3-32-32V128zm224 0c0-17.7 14.3-32 32-32h96c17.7 0 32 14.3 32 32V352c0 17.7-14.3 32-32 32H384c-17.7 0-32-14.3-32-32V128z"/>
+            </svg>
+            All
+          </button>
+          <button class="rule-tab-btn" data-rule="1">
+            <svg width="14" height="14" viewBox="0 0 512 512" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+              <path d="M269.4 2.9C265.2 1 260.7 0 256 0s-9.2 1-13.4 2.9L54.3 82.8c-22 9.3-38.4 31-38.3 57.2c.5 99.2 41.3 280.7 213.6 363.2c16.7 8 36.1 8 52.8 0C454.7 420.7 495.5 239.2 496 140c.1-26.2-16.3-47.9-38.3-57.2L269.4 2.9z"/>
+            </svg>
+            Be kind
+          </button>
+          <button class="rule-tab-btn" data-rule="2">
+            <svg width="14" height="14" viewBox="0 0 512 512" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+              <path d="M123.6 391.3c12.2-9.3 19.4-23.4 19.4-38.7c0-26.5-21.5-48-48-48S48 326.5 48 353c0 15.3 7.2 29.4 19.4 38.7C27.5 362.1 0 328.6 0 288c0-61.9 50.1-112 112-112c32.2 0 61.8 13.7 82.7 37.5c9.8-3.7 20.5-5.9 31.8-5.9c0 0 0 0 0 0c.1 0 .1 0 .2 0c.1 0 .1 0 .2 0c44.2 0 80 35.8 80 80c0 5-.9 9.7-2.4 14.2C365.7 319.8 416 360.7 416 416c0 53-43 96-96 96c-19.2 0-37.1-5.6-52.1-15.2C243.3 505.3 217.8 512 192 512C86 512 0 426 0 320c0-62.3 29.6-117.7 75.3-153.3C73.2 150.7 64 133.1 64 112C64 50.1 114.1 0 176 0c43.1 0 80.5 24.3 99.2 60c14.7 17.1 36.8 28 60.8 28c44.2 0 80-35.8 80-80s-35.8-80-80-80c-7.7 0-15.1 1.1-22.1 3.1c-9.2 2.7-17-5.3-14.3-14.5C198.1 4.1 196.5 2 194.7 0H320c17.7 0 32 14.3 32 32s-14.3 32-32 32H256c0 17.7 14.3 32 32 32s32 14.3 32 32s-14.3 32-32 32s-32 14.3-32 32H192c-17.7 0-32-14.3-32-32s14.3-32 32-32h64c0-17.7-14.3-32-32-32s-32-14.3-32-32s14.3-32 32-32h64c17.7 0 32 14.3 32 32z"/>
+            </svg>
+            On topic
+          </button>
+          <button class="rule-tab-btn" data-rule="3">
+            <svg width="14" height="14" viewBox="0 0 512 512" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+              <path d="M367.2 412.5L99.5 144.8C77.1 176.1 64 214.5 64 256c0 106 86 192 192 192c41.5 0 79.9-13.1 111.2-35.5zm45.3-45.3C434.9 329.9 448 295.1 448 256c0-106-86-192-192-192c-39.1 0-73.9 13.1-111.2 35.5L412.5 367.2zM0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256z"/>
+            </svg>
+            No NSFW
+          </button>
+          <button class="rule-tab-btn" data-rule="4">
+            <svg width="14" height="14" viewBox="0 0 576 512" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+              <path d="M208 80H576V48C576 21.5 554.5 0 528 0H112C85.5 0 64 21.5 64 48v48H144C160.8 96 176 111.2 176 128S160.8 160 144 160H64v320c0 26.5 21.5 48 48 48h416c26.5 0 48-21.5 48-48V160H432c-17.67 0-32-14.33-32-32s14.33-32 32-32h144V48H208V80zM416 224c0-17.67 14.33-32 32-32s32 14.33 32 32v192c0 17.67-14.33 32-32 32s-32-14.33-32-32V224zM304 224v192c0 17.67-14.33 32-32 32s-32-14.33-32-32V224c0-17.67 14.33-32 32-32S304 206.33 304 224zM176 224v192c0 17.67-14.33 32-32 32s-32-14.33-32-32V224c0-17.67 14.33-32 32-32S176 206.33 176 224z"/>
+            </svg>
+            No promo
+          </button>
+          <button class="rule-tab-btn" data-rule="5">
+            <svg width="14" height="14" viewBox="0 0 640 512" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+              <path d="M186.3 13.3C197.8-4.4 220.2-4.4 231.7 13.3l144 192c6.2 8.3 8.4 18.8 6 28.5L360.8 421.3c-3.1 12.3-13.8 21.5-26.4 23.8l-184 32c-15.3 2.7-29.5-7.8-32.2-23.1s7.8-29.5 23.1-32.2l137.8-24-20.9-83.6L66.3 256.1c-9.4-12.5-7.2-30.4 5.1-39.7l144-112c10.1-7.9 24.2-7.9 34.3 0l144 112c12.3 9.4 14.5 27.2 5.1 39.7L384 305.1l-5.1 20.3 25.3-4.4c12.6-2.2 23.3-11.5 26.4-23.8l18.1-72.2c2.4-9.7 .2-20.2-6-28.5l-144-192zM32 320c-17.7 0-32 14.3-32 32s14.3 32 32 32H96v32H32c-17.7 0-32 14.3-32 32s14.3 32 32 32H96 224c17.7 0 32-14.3 32-32s-14.3-32-32-32H160V384h64c17.7 0 32-14.3 32-32s-14.3-32-32-32H32zm352 0c-17.7 0-32 14.3-32 32s14.3 32 32 32h64v32H384c-17.7 0-32 14.3-32 32s14.3 32 32 32H448 608c17.7 0 32-14.3 32-32s-14.3-32-32-32H544V384h64c17.7 0 32-14.3 32-32s-14.3-32-32-32H384z"/>
+            </svg>
+            No gambling
+          </button>
+        </div>
+        
+        <!-- Rule Tab Content -->
+        <div class="rule-tab-content active" id="rule-tab-all">
+          <div id="analyticsUsersList" class="analytics-users-list">
+            <div class="empty-state" id="analyticsEmptyState">
+              <p>No users marked yet.</p>
+              <p>Go to the Users tab to add users.</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="rule-tab-content" id="rule-tab-1">
+          <div id="rule1UsersList" class="analytics-users-list">
+            <div class="empty-state">
+              <p>No violations for "Be kind and respectful".</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="rule-tab-content" id="rule-tab-2">
+          <div id="rule2UsersList" class="analytics-users-list">
+            <div class="empty-state">
+              <p>No violations for "Keep Tweets on topic".</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="rule-tab-content" id="rule-tab-3">
+          <div id="rule3UsersList" class="analytics-users-list">
+            <div class="empty-state">
+              <p>No violations for "No NSFW".</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="rule-tab-content" id="rule-tab-4">
+          <div id="rule4UsersList" class="analytics-users-list">
+            <div class="empty-state">
+              <p>No violations for "No self promo".</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="rule-tab-content" id="rule-tab-5">
+          <div id="rule5UsersList" class="analytics-users-list">
+            <div class="empty-state">
+              <p>No violations for "No gambling clips".</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Rule Statistics -->
+      <div class="card rule-stats-card">
+        <div class="rule-stats-header">
+          <h2>Rule Statistics</h2>
+          <button class="collapse-btn" id="ruleStatsCollapseBtn">
+            <svg width="12" height="12" viewBox="0 0 448 512" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+              <path d="M201.4 342.6c12.5 12.5 32.8 12.5 45.3 0l160-160c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 274.7 86.6 137.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l160 160z"/>
+            </svg>
+          </button>
+        </div>
+        <div class="rule-stats-content" id="ruleStatsContent">
+          <div class="rule-stats-grid" id="ruleStatsGrid">
+            <!-- Dynamically generated rule statistics -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Settings Tab Content -->
+    <div class="tab-content" id="settings-content">
+      <div class="card settings-card">
+        <h2>Settings</h2>
+        <div class="setting-item">
+          <label class="setting-label">
+            <span>Show labels on X.com</span>
+            <div class="toggle-switch">
+              <input type="checkbox" id="showLabels" checked>
+              <span class="slider"></span>
+            </div>
+          </label>
+        </div>
+        <div class="setting-item">
+          <label class="setting-label">
+            <span>Notifications</span>
+            <div class="toggle-switch">
+              <input type="checkbox" id="notifications" checked>
+              <span class="slider"></span>
+            </div>
+          </label>
+        </div>
+      </div>
+
+      <!-- Data Management -->
+      <div class="card data-management-card">
+        <h2>Data Management</h2>
+        <div class="data-management-actions">
+          <button id="exportDataBtn" class="btn btn-secondary">
+            <svg width="14" height="14" viewBox="0 0 512 512" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+              <path d="M288 32c0-17.7-14.3-32-32-32s-32 14.3-32 32V274.7l-73.4-73.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l128 128c12.5 12.5 32.8 12.5 45.3 0l128-128c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L288 274.7V32zM64 352c-35.3 0-64 28.7-64 64v32c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V416c0-35.3-28.7-64-64-64H346.5l-45.3 45.3c-25 25-65.5 25-90.5 0L165.5 352H64zm368 56a24 24 0 1 1 0 48 24 24 0 1 1 0-48z"/>
+            </svg>
+            Export Data
+          </button>
+          <label for="importDataInput" class="btn btn-secondary" style="cursor: pointer; display: inline-flex; align-items: center; gap: 6px;">
+            <svg width="14" height="14" viewBox="0 0 512 512" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+              <path d="M288 109.3V352c0 17.7-14.3 32-32 32s-32-14.3-32-32V109.3l-73.4 73.4c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3l128-128c12.5-12.5 32.8-12.5 45.3 0l128 128c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L288 109.3zM64 352H192c0 35.3 28.7 64 64 64s64-28.7 64-64H448c35.3 0 64 28.7 64 64v32c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V416c0-35.3 28.7-64 64-64z"/>
+            </svg>
+            Import Data
+            <input type="file" id="importDataInput" accept=".json" style="display: none;">
+          </label>
+        </div>
+        <div class="data-management-info">
+          <p>Export all your data (users, rules, settings) as JSON. Import to restore from backup.</p>
+        </div>
+      </div>
+      
+      <!-- Extension Info -->
+      <div class="card extension-info-card">
+        <div class="extension-info-content">
+          <div class="extension-info-left">
+            <div class="extension-info-avatar">
+              <img src="icons/lomaxxx-avatar.png" alt="Lomaxxx" class="extension-info-avatar-img">
+            </div>
+            <a href="https://x.com/Lom4xxx" target="_blank" rel="noopener noreferrer" class="extension-info-link" title="Visit @Lom4xxx on X.com">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+              </svg>
+              <span>Visit my X profile</span>
+            </a>
+          </div>
+          <div class="extension-info-text">
+            <div class="extension-info-author">
+              <span class="extension-info-badge">Created by</span> Lomaxxx
+            </div>
+            <div class="extension-info-description">Professional moderation tool for X.com/Twitter. Mark rule-breaking users with colored labels for better community management.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Privacy Policy Link -->
+      <div class="card privacy-policy-card">
+        <div class="privacy-policy-content">
+          <div class="privacy-policy-icon">
+            <svg width="20" height="20" viewBox="0 0 512 512" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+              <path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM216 336h24V272H216c-13.3 0-24-10.7-24-24s10.7-24 24-24h48c13.3 0 24 10.7 24 24v88h8c13.3 0 24 10.7 24 24s-10.7 24-24 24H216c-13.3 0-24-10.7-24-24s10.7-24 24-24zm40-208a32 32 0 1 1 0 64 32 32 0 1 1 0-64z"/>
+            </svg>
+          </div>
+          <div class="privacy-policy-text">
+            <div class="privacy-policy-title">Privacy Policy</div>
+            <div class="privacy-policy-description">Learn how we handle your data</div>
+          </div>
+          <a href="https://github.com/Lomaxxx-xflagr/X-Flagr/blob/main/PRIVACY_POLICY.md" target="_blank" rel="noopener noreferrer" class="privacy-policy-link" id="privacyPolicyLink">
+            <svg width="16" height="16" viewBox="0 0 512 512" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+              <path d="M320 0c-17.7 0-32 14.3-32 32s14.3 32 32 32h82.7L201.4 265.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L448 109.3V192c0 17.7 14.3 32 32 32s32-14.3 32-32V32c0-17.7-14.3-32-32-32H320zM80 32C35.8 32 0 67.8 0 112V432c0 44.2 35.8 80 80 80H400c44.2 0 80-35.8 80-80V320c0-17.7-14.3-32-32-32s-32 14.3-32 32V432c0 8.8-7.2 16-16 16H80c-8.8 0-16-7.2-16-16V112c0-8.8 7.2-16 16-16H192c17.7 0 32-14.3 32-32s-14.3-32-32-32H80z"/>
+            </svg>
+            View Policy
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <script src="popup.js"></script>
+</body>
+</html>
+
