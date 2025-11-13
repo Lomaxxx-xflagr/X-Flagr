@@ -46,6 +46,7 @@ Mark rule-breaking users with colored labels for better community management and
 
 ### Main Interface
 ![Main Interface](screenshots/x-flagr-main.jpg)
+
 *Main popup interface showing the Users tab*
 
 ### User Management
