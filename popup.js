@@ -5,10 +5,9 @@
  * Handles UI interactions, user management, rule management, and settings
  * for the extension popup interface.
  * 
- * @version 1.0.0
+ * @version 1.0.1
  * 
- * Copyright (c) 2025 Lomaxxx
- * All Rights Reserved.
+ * Copyright (c) 2025 by Lomaxxx
  * 
  * This software and associated documentation files (the "Software") are 
  * proprietary and confidential. Unauthorized copying, modification, 

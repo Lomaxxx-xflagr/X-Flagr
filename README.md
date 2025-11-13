@@ -334,12 +334,22 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ---
 
-## 🙏 Acknowledgments
+## 🙏 About This Project
 
-- Built for X.com/Twitter community moderators
-- Inspired by the need for better moderation tools
-- Made with ❤️ for the community
+This is a **hobby project** that was born out of personal necessity. As a community moderator myself, I found that the built-in moderation tools provided by X.com are quite limited or simply non-existent. When managing large communities with thousands of users, it's easy to lose track of repeat offenders and their violation history.
+
+**X-Flagr** was created to solve this problem—to help moderators like myself maintain better oversight and remember important context about users who repeatedly violate community rules.
+
+### 💡 Feedback & Contributions
+
+I'm always open to **suggestions for improvements** and welcome constructive feedback! However, please keep in mind that this is a personal hobby project developed primarily for my own use. While I appreciate contributions and ideas, development happens in my spare time and is driven by my own needs as a moderator.
+
+If you have ideas, feature requests, or encounter bugs, feel free to [open an issue](https://github.com/Lomaxxx-xflagr/X-Flagr/issues) or start a [discussion](https://github.com/Lomaxxx-xflagr/X-Flagr/discussions). I'll do my best to address them when time permits.
 
 ---
 
-**Made with ❤️ for X.com/Twitter moderators and community managers**
+<div align="center">
+
+**Made with ❤️ by [Lomaxxx](https://github.com/Lomaxxx-xflagr)**
+
+</div>
