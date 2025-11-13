@@ -320,6 +320,7 @@ class PopupUI {
     // Rule tab elements
     this.ruleTabBtns = document.querySelectorAll('.rule-tab-btn');
     this.ruleTabContents = document.querySelectorAll('.rule-tab-content');
+    this.ruleTabsNavigation = document.getElementById('ruleTabsNavigation');
     
     // Search and filter elements
     this.analyticsSearchInput = document.getElementById('analyticsSearchInput');
@@ -486,13 +487,16 @@ class PopupUI {
       });
     });
     
-    // Rule tab navigation
-    this.ruleTabBtns.forEach(btn => {
-      btn.addEventListener('click', (e) => {
-        e.preventDefault();
-        this.switchRuleTab(btn.dataset.rule);
+    // Rule tab navigation - use event delegation since buttons are dynamically generated
+    if (this.ruleTabsNavigation) {
+      this.ruleTabsNavigation.addEventListener('click', (e) => {
+        const btn = e.target.closest('.rule-tab-btn');
+        if (btn) {
+          e.preventDefault();
+          this.switchRuleTab(btn.dataset.rule);
+        }
       });
-    });
+    }
     
     // Collapse toggle
     if (this.ruleStatsCollapseBtn) {
@@ -750,6 +754,9 @@ class PopupUI {
     
     // Inject dynamic CSS for rule colors
     this.injectRuleCSS(rules);
+    
+    // Update rule filter buttons and content divs dynamically
+    this.updateRuleFilters(rules);
     
     // Update rule statistics if on analytics tab
     if (this.currentTab === 'analytics') {
@@ -1396,6 +1403,67 @@ class PopupUI {
         }
       }
     });
+  }
+
+  updateRuleFilters(rules) {
+    if (!this.ruleTabsNavigation) return;
+    
+    // Remove all existing rule buttons except "all"
+    const existingRuleBtns = this.ruleTabsNavigation.querySelectorAll('.rule-tab-btn[data-rule!="all"]');
+    existingRuleBtns.forEach(btn => btn.remove());
+    
+    // Remove all existing rule content divs except "all"
+    const existingRuleContents = document.querySelectorAll('.rule-tab-content[id!="rule-tab-all"]');
+    existingRuleContents.forEach(content => content.remove());
+    
+    // Create buttons and content divs for each rule
+    rules.forEach(rule => {
+      const safeRuleName = SecurityUtils.escapeHtml(rule.name);
+      const safeRuleId = SecurityUtils.escapeHtml(rule.id);
+      const safeColor = SecurityUtils.validateHexColor(rule.color);
+      
+      // Create button
+      const btn = document.createElement('button');
+      btn.className = 'rule-tab-btn';
+      btn.dataset.rule = safeRuleId;
+      btn.innerHTML = `
+        <svg width="14" height="14" viewBox="0 0 512 512" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+          <path d="M269.4 2.9C265.2 1 260.7 0 256 0s-9.2 1-13.4 2.9L54.3 82.8c-22 9.3-38.4 31-38.3 57.2c.5 99.2 41.3 280.7 213.6 363.2c16.7 8 36.1 8 52.8 0C454.7 420.7 495.5 239.2 496 140c.1-26.2-16.3-47.9-38.3-57.2L269.4 2.9z"/>
+        </svg>
+        ${safeRuleName}
+      `;
+      btn.addEventListener('click', () => {
+        this.switchRuleTab(safeRuleId);
+      });
+      
+      // Insert after "all" button
+      const allBtn = this.ruleTabsNavigation.querySelector('.rule-tab-btn[data-rule="all"]');
+      if (allBtn) {
+        allBtn.parentNode.insertBefore(btn, allBtn.nextSibling);
+      }
+      
+      // Create content div
+      const contentDiv = document.createElement('div');
+      contentDiv.className = 'rule-tab-content';
+      contentDiv.id = `rule-tab-${safeRuleId}`;
+      contentDiv.innerHTML = `
+        <div id="rule${safeRuleId}UsersList" class="analytics-users-list">
+          <div class="empty-state">
+            <p>No violations for "${safeRuleName}".</p>
+          </div>
+        </div>
+      `;
+      
+      // Insert after "all" content div
+      const allContent = document.getElementById('rule-tab-all');
+      if (allContent && allContent.parentNode) {
+        allContent.parentNode.insertBefore(contentDiv, allContent.nextSibling);
+      }
+    });
+    
+    // Update references to rule tab buttons and contents
+    this.ruleTabBtns = document.querySelectorAll('.rule-tab-btn');
+    this.ruleTabContents = document.querySelectorAll('.rule-tab-content');
   }
 
   switchRuleTab(rule) {

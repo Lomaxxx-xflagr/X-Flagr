@@ -390,43 +390,14 @@
         </div>
 
         <!-- Rule Tabs Navigation -->
-        <div class="rule-tabs-navigation">
+        <div class="rule-tabs-navigation" id="ruleTabsNavigation">
           <button class="rule-tab-btn active" data-rule="all">
             <svg width="14" height="14" viewBox="0 0 512 512" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
               <path d="M32 32c17.7 0 32 14.3 32 32V400c0 8.8 7.2 16 16 16H480c17.7 0 32 14.3 32 32s-14.3 32-32 32H80c-44.2 0-80-35.8-80-80V64C0 46.3 14.3 32 32 32zm96 96c0-17.7 14.3-32 32-32h96c17.7 0 32 14.3 32 32v96c0 17.7-14.3 32-32 32H160c-17.7 0-32-14.3-32-32V128zm224 0c0-17.7 14.3-32 32-32h96c17.7 0 32 14.3 32 32V352c0 17.7-14.3 32-32 32H384c-17.7 0-32-14.3-32-32V128z"/>
             </svg>
             All
           </button>
-          <button class="rule-tab-btn" data-rule="1">
-            <svg width="14" height="14" viewBox="0 0 512 512" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-              <path d="M269.4 2.9C265.2 1 260.7 0 256 0s-9.2 1-13.4 2.9L54.3 82.8c-22 9.3-38.4 31-38.3 57.2c.5 99.2 41.3 280.7 213.6 363.2c16.7 8 36.1 8 52.8 0C454.7 420.7 495.5 239.2 496 140c.1-26.2-16.3-47.9-38.3-57.2L269.4 2.9z"/>
-            </svg>
-            Be kind
-          </button>
-          <button class="rule-tab-btn" data-rule="2">
-            <svg width="14" height="14" viewBox="0 0 512 512" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-              <path d="M123.6 391.3c12.2-9.3 19.4-23.4 19.4-38.7c0-26.5-21.5-48-48-48S48 326.5 48 353c0 15.3 7.2 29.4 19.4 38.7C27.5 362.1 0 328.6 0 288c0-61.9 50.1-112 112-112c32.2 0 61.8 13.7 82.7 37.5c9.8-3.7 20.5-5.9 31.8-5.9c0 0 0 0 0 0c.1 0 .1 0 .2 0c.1 0 .1 0 .2 0c44.2 0 80 35.8 80 80c0 5-.9 9.7-2.4 14.2C365.7 319.8 416 360.7 416 416c0 53-43 96-96 96c-19.2 0-37.1-5.6-52.1-15.2C243.3 505.3 217.8 512 192 512C86 512 0 426 0 320c0-62.3 29.6-117.7 75.3-153.3C73.2 150.7 64 133.1 64 112C64 50.1 114.1 0 176 0c43.1 0 80.5 24.3 99.2 60c14.7 17.1 36.8 28 60.8 28c44.2 0 80-35.8 80-80s-35.8-80-80-80c-7.7 0-15.1 1.1-22.1 3.1c-9.2 2.7-17-5.3-14.3-14.5C198.1 4.1 196.5 2 194.7 0H320c17.7 0 32 14.3 32 32s-14.3 32-32 32H256c0 17.7 14.3 32 32 32s32 14.3 32 32s-14.3 32-32 32s-32 14.3-32 32H192c-17.7 0-32-14.3-32-32s14.3-32 32-32h64c0-17.7-14.3-32-32-32s-32-14.3-32-32s14.3-32 32-32h64c17.7 0 32 14.3 32 32z"/>
-            </svg>
-            On topic
-          </button>
-          <button class="rule-tab-btn" data-rule="3">
-            <svg width="14" height="14" viewBox="0 0 512 512" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-              <path d="M367.2 412.5L99.5 144.8C77.1 176.1 64 214.5 64 256c0 106 86 192 192 192c41.5 0 79.9-13.1 111.2-35.5zm45.3-45.3C434.9 329.9 448 295.1 448 256c0-106-86-192-192-192c-39.1 0-73.9 13.1-111.2 35.5L412.5 367.2zM0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256z"/>
-            </svg>
-            No NSFW
-          </button>
-          <button class="rule-tab-btn" data-rule="4">
-            <svg width="14" height="14" viewBox="0 0 576 512" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-              <path d="M208 80H576V48C576 21.5 554.5 0 528 0H112C85.5 0 64 21.5 64 48v48H144C160.8 96 176 111.2 176 128S160.8 160 144 160H64v320c0 26.5 21.5 48 48 48h416c26.5 0 48-21.5 48-48V160H432c-17.67 0-32-14.33-32-32s14.33-32 32-32h144V48H208V80zM416 224c0-17.67 14.33-32 32-32s32 14.33 32 32v192c0 17.67-14.33 32-32 32s-32-14.33-32-32V224zM304 224v192c0 17.67-14.33 32-32 32s-32-14.33-32-32V224c0-17.67 14.33-32 32-32S304 206.33 304 224zM176 224v192c0 17.67-14.33 32-32 32s-32-14.33-32-32V224c0-17.67 14.33-32 32-32S176 206.33 176 224z"/>
-            </svg>
-            No promo
-          </button>
-          <button class="rule-tab-btn" data-rule="5">
-            <svg width="14" height="14" viewBox="0 0 640 512" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-              <path d="M186.3 13.3C197.8-4.4 220.2-4.4 231.7 13.3l144 192c6.2 8.3 8.4 18.8 6 28.5L360.8 421.3c-3.1 12.3-13.8 21.5-26.4 23.8l-184 32c-15.3 2.7-29.5-7.8-32.2-23.1s7.8-29.5 23.1-32.2l137.8-24-20.9-83.6L66.3 256.1c-9.4-12.5-7.2-30.4 5.1-39.7l144-112c10.1-7.9 24.2-7.9 34.3 0l144 112c12.3 9.4 14.5 27.2 5.1 39.7L384 305.1l-5.1 20.3 25.3-4.4c12.6-2.2 23.3-11.5 26.4-23.8l18.1-72.2c2.4-9.7 .2-20.2-6-28.5l-144-192zM32 320c-17.7 0-32 14.3-32 32s14.3 32 32 32H96v32H32c-17.7 0-32 14.3-32 32s14.3 32 32 32H96 224c17.7 0 32-14.3 32-32s-14.3-32-32-32H160V384h64c17.7 0 32-14.3 32-32s-14.3-32-32-32H32zm352 0c-17.7 0-32 14.3-32 32s14.3 32 32 32h64v32H384c-17.7 0-32 14.3-32 32s14.3 32 32 32H448 608c17.7 0 32-14.3 32-32s-14.3-32-32-32H544V384h64c17.7 0 32-14.3 32-32s-14.3-32-32-32H384z"/>
-            </svg>
-            No gambling
-          </button>
+          <!-- Rule filter buttons will be dynamically generated here -->
         </div>
         
         <!-- Rule Tab Content -->
@@ -438,46 +409,7 @@
             </div>
           </div>
         </div>
-        
-        <div class="rule-tab-content" id="rule-tab-1">
-          <div id="rule1UsersList" class="analytics-users-list">
-            <div class="empty-state">
-              <p>No violations for "Be kind and respectful".</p>
-            </div>
-          </div>
-        </div>
-        
-        <div class="rule-tab-content" id="rule-tab-2">
-          <div id="rule2UsersList" class="analytics-users-list">
-            <div class="empty-state">
-              <p>No violations for "Keep Tweets on topic".</p>
-            </div>
-          </div>
-        </div>
-        
-        <div class="rule-tab-content" id="rule-tab-3">
-          <div id="rule3UsersList" class="analytics-users-list">
-            <div class="empty-state">
-              <p>No violations for "No NSFW".</p>
-            </div>
-          </div>
-        </div>
-        
-        <div class="rule-tab-content" id="rule-tab-4">
-          <div id="rule4UsersList" class="analytics-users-list">
-            <div class="empty-state">
-              <p>No violations for "No self promo".</p>
-            </div>
-          </div>
-        </div>
-        
-        <div class="rule-tab-content" id="rule-tab-5">
-          <div id="rule5UsersList" class="analytics-users-list">
-            <div class="empty-state">
-              <p>No violations for "No gambling clips".</p>
-            </div>
-          </div>
-        </div>
+        <!-- Rule tab content divs will be dynamically generated here -->
       </div>
 
       <!-- Rule Statistics -->
