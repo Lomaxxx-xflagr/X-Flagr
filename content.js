@@ -1514,7 +1514,14 @@ class XModHelper {
         
         if (btn.classList.contains('xmod-quick-mark-more')) {
           // Open extension popup for full rule list
-          chrome.runtime.sendMessage({ action: 'openPopup' });
+          try {
+            chrome.runtime.sendMessage({ action: 'openPopup' }).catch(() => {
+              // Silently fail if extension context is invalidated
+              console.warn('Could not open popup - extension may need reload');
+            });
+          } catch (error) {
+            console.warn('Extension context invalidated:', error);
+          }
           this.closeQuickMarkPopup();
         } else if (ruleId && ruleId.trim() !== '') {
           console.log('Calling markUserFromTweet with:', { username, ruleId });
@@ -1557,30 +1564,17 @@ class XModHelper {
       console.log('Processing:', { cleanUsername, usernameLower, ruleIdStr });
 
       // Get current marked users
-      const result = await chrome.storage.local.get(['markedUsers']);
-      const users = result.markedUsers || {};
-      
-      console.log('Current users count:', Object.keys(users).length);
-
-      // Check license limits (only for new users)
-      if (!users[usernameLower]) {
-        // Get license info to check limits
-        const licenseResult = await chrome.storage.local.get(['license']);
-        const license = licenseResult.license || { version: 'free', activated: false };
-        const version = license.version || 'free';
-        
-        // Get limits based on version
-        let maxUsers = 5; // Free default
-        if (version === 'basic') maxUsers = 10;
-        else if (version === 'pro') maxUsers = 100;
-        else if (version === 'enterprise') maxUsers = 999;
-        
-        const currentUserCount = Object.keys(users).length;
-        if (currentUserCount >= maxUsers) {
-          alert(`Maximum ${maxUsers} users allowed in your plan. Current: ${currentUserCount}/${maxUsers}`);
-          return;
-        }
+      let result;
+      try {
+        result = await chrome.storage.local.get(['markedUsers']);
+      } catch (error) {
+        console.error('Error accessing storage:', error);
+        alert('Error marking user: Extension context invalidated. Please reload the page.');
+        return;
       }
+      
+      const users = result.markedUsers || {};
+      console.log('Current users count:', Object.keys(users).length);
 
       // Initialize user data if it doesn't exist
       if (!users[usernameLower]) {
@@ -1623,10 +1617,15 @@ class XModHelper {
       users[usernameLower].timestamp = Date.now();
 
       // Save to storage
-      await chrome.storage.local.set({ markedUsers: users });
-      
-      console.log('User saved successfully:', usernameLower);
-      console.log('User data:', users[usernameLower]);
+      try {
+        await chrome.storage.local.set({ markedUsers: users });
+        console.log('User saved successfully:', usernameLower);
+        console.log('User data:', users[usernameLower]);
+      } catch (error) {
+        console.error('Error saving user:', error);
+        alert('Error marking user: Extension context invalidated. Please reload the page.');
+        return;
+      }
 
       // Reload marked users
       await this.loadMarkedUsers();
