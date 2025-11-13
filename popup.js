@@ -1416,12 +1416,20 @@ class PopupUI {
     if (!this.ruleTabsNavigation) return;
     
     // Remove all existing rule buttons except "all"
-    const existingRuleBtns = this.ruleTabsNavigation.querySelectorAll('.rule-tab-btn[data-rule!="all"]');
-    existingRuleBtns.forEach(btn => btn.remove());
+    const allRuleBtns = this.ruleTabsNavigation.querySelectorAll('.rule-tab-btn');
+    allRuleBtns.forEach(btn => {
+      if (btn.dataset.rule !== 'all') {
+        btn.remove();
+      }
+    });
     
     // Remove all existing rule content divs except "all"
-    const existingRuleContents = document.querySelectorAll('.rule-tab-content[id!="rule-tab-all"]');
-    existingRuleContents.forEach(content => content.remove());
+    const allRuleContents = document.querySelectorAll('.rule-tab-content');
+    allRuleContents.forEach(content => {
+      if (content.id !== 'rule-tab-all') {
+        content.remove();
+      }
+    });
     
     // Create buttons and content divs for each rule
     rules.forEach(rule => {
