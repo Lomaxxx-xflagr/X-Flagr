@@ -51,36 +51,46 @@ Mark rule-breaking users with colored labels for better community management and
 
 ### User Management
 ![Mark User](screenshots/x-flagr-mark-user.jpg)
+
 *Add new users and assign rule violations*
 
 ![Marked Users](screenshots/x-flagr-marked-users.jpg)
+
 *View all marked users with analytics and filtering options*
 
 ![User Details](screenshots/x-flagr-user-details.jpg)
+
 *Detailed user information panel with reputation score and violation history*
 
 ### Rule Management
 ![Add New Rule](screenshots/x-flagr-add-new-rule.jpg)
+
 *Create custom rules with color coding*
 
 ![Your Rules](screenshots/x-flagr-your-rules.jpg)
+
 *Manage and edit existing rules*
 
 ![Rule Statistics](screenshots/x-flagr-rule-statistics.jpg)
+
 *Statistics breakdown by rule category*
 
 ### Analytics & Reports
 ![Analytics Dashboard](screenshots/x-flagr-analytics.jpg)
+
 *Comprehensive analytics dashboard with charts and insights*
 
 ![Top Offenders](screenshots/x-flagr-top-offenders.jpg)
+
 *Top offenders list with violation counts and trends*
 
 ### Quick Actions
 ![Quick Actions](screenshots/x-flagr-quickactions.jpg)
+
 *Quick-mark feature for instant user marking from tweets*
 
 ![Tweet View with Floating Panel](screenshots/x-flagr-tweet-view-floating-panel.jpg)
+
 *User details panel displayed over X.com tweet view*
 
 ---
