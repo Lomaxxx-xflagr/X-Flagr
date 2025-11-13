@@ -104,8 +104,9 @@ Mark rule-breaking users with colored labels for better community management and
 ### Manual Installation (GitHub)
 
 1. **Download the Extension**
-   - Click the green "Code" button on this repository
-   - Select "Download ZIP"
+   - Go to [Releases](https://github.com/Lomaxxx-xflagr/X-Flagr/releases)
+   - Download the latest release ZIP file (recommended)
+   - OR click the green "Code" button and select "Download ZIP" (includes screenshots - you can delete the `screenshots/` folder after extraction)
    - Extract the ZIP file to a location of your choice
 
 2. **Install in Chrome/Edge/Brave**
