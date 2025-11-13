@@ -328,6 +328,19 @@ For questions, feature requests, or bug reports:
 
 ---
 
+## ⚠️ Known Issues
+
+I'm aware that there are still some minor cosmetic issues and imperfections here and there. These will be addressed gradually over time as I continue to improve the extension.
+
+**Current known limitations:**
+- ⏱️ **Real-time updates**: The real-time display of labels and buttons may occasionally require a page refresh in some edge cases. This is a known issue that will be refined in future updates.
+
+**Important note:** Despite these minor issues, the extension is **fully functional and more than helpful** in its current state. All core features work reliably, and the tool provides significant value for community moderation tasks.
+
+I'm committed to continuously improving X-Flagr, and these cosmetic issues will be polished over time as part of the ongoing development process.
+
+---
+
 ## 📄 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
