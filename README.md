@@ -1,3 +1,7 @@
+<div align="center">
+  <img src="images/x-flagr-logo.svg" alt="X-Flagr Logo" width="400">
+</div>
+
 # X-Flagr
 
 **Professional moderation tool for X.com/Twitter community managers and moderators.**
