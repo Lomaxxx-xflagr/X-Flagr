@@ -71,3 +71,6 @@ site/
 # Release builds (created by build script)
 X-Flagr-v*.zip
 
+# Screenshots (for README only, not needed in extension)
+screenshots/
+

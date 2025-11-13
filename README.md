@@ -105,8 +105,8 @@ Mark rule-breaking users with colored labels for better community management and
 
 1. **Download the Extension**
    - Go to [Releases](https://github.com/Lomaxxx-xflagr/X-Flagr/releases)
-   - Download the latest release ZIP file (recommended)
-   - OR click the green "Code" button and select "Download ZIP" (includes screenshots - you can delete the `screenshots/` folder after extraction)
+   - Download the **"X-Flagr-v1.0.1.zip"** file from the Assets section (this ZIP does NOT include screenshots)
+   - ⚠️ **Important**: Do NOT use the "Source code (zip)" download - that includes screenshots and other files not needed for the extension
    - Extract the ZIP file to a location of your choice
 
 2. **Install in Chrome/Edge/Brave**
