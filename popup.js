@@ -147,9 +147,7 @@ class RuleStorage {
       const defaultRules = [
         { id: '1', name: 'Be kind and respectful', color: '#ef4444', createdAt: Date.now() },
         { id: '2', name: 'Keep Tweets on topic', color: '#f59e0b', createdAt: Date.now() },
-        { id: '3', name: 'No NSFW', color: '#8b5cf6', createdAt: Date.now() },
-        { id: '4', name: 'No self promo', color: '#06b6d4', createdAt: Date.now() },
-        { id: '5', name: 'No gambling clips', color: '#10b981', createdAt: Date.now() }
+        { id: '3', name: 'No NSFW', color: '#8b5cf6', createdAt: Date.now() }
       ];
       
       await this.saveRules(defaultRules);
