@@ -480,10 +480,15 @@ class PopupUI {
     });
     
     // Tab navigation
+    // Re-query to ensure we have the latest elements
+    this.tabBtns = document.querySelectorAll('.tab-btn');
     this.tabBtns.forEach(btn => {
       btn.addEventListener('click', (e) => {
         e.preventDefault();
-        this.switchTab(btn.dataset.tab);
+        const tabName = btn.dataset.tab;
+        if (tabName) {
+          this.switchTab(tabName);
+        }
       });
     });
     
