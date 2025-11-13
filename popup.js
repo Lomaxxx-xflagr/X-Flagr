@@ -479,18 +479,20 @@ class PopupUI {
       if (e.key === 'Enter') this.addUser();
     });
     
-    // Tab navigation
-    // Re-query to ensure we have the latest elements
-    this.tabBtns = document.querySelectorAll('.tab-btn');
-    this.tabBtns.forEach(btn => {
-      btn.addEventListener('click', (e) => {
-        e.preventDefault();
-        const tabName = btn.dataset.tab;
-        if (tabName) {
-          this.switchTab(tabName);
+    // Tab navigation - use event delegation
+    const tabNavigation = document.querySelector('.tab-navigation');
+    if (tabNavigation) {
+      tabNavigation.addEventListener('click', (e) => {
+        const btn = e.target.closest('.tab-btn');
+        if (btn) {
+          e.preventDefault();
+          const tabName = btn.dataset.tab;
+          if (tabName) {
+            this.switchTab(tabName);
+          }
         }
       });
-    });
+    }
     
     // Rule tab navigation - use event delegation since buttons are dynamically generated
     if (this.ruleTabsNavigation) {
